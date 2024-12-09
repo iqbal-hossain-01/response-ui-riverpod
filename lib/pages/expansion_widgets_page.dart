@@ -21,9 +21,9 @@ class _ExpansionWidgetsPageState extends State<ExpansionWidgetsPage> {
       'content': 'This is the content of Section 2.'
     },
     {
-      'title': 'Section 2',
-      'subtitle': 'Details about Section 2',
-      'content': 'This is the content of Section 2.'
+      'title': 'Section 3',
+      'subtitle': 'Details about Section 3',
+      'content': 'This is the content of Section 3.'
     },
   ];
 
@@ -41,6 +41,55 @@ class _ExpansionWidgetsPageState extends State<ExpansionWidgetsPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Expansion Widgets'),
+      ),
+      /*
+      body: ListView.builder(
+        itemCount: items.length,
+        itemBuilder: (context, index) {
+          final item = items[index];
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Card(
+              child: ExpansionTile(
+
+                title: Text(item['title']),
+                subtitle: Text(item['subtitle']),
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Text(item['content']),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+
+       */
+      body: SingleChildScrollView(
+        child: ExpansionPanelList(
+          expansionCallback: (panelIndex, expanded) {
+            setState(() {
+              //_data[panelIndex].isExpanded = expanded;
+              _data[panelIndex].isExpanded = !_data[panelIndex].isExpanded;
+            });
+          },
+          children: _data.map<ExpansionPanel>((Item item) {
+            return ExpansionPanel(
+              headerBuilder: (context, isExpanded) {
+                return ListTile(
+                  title: Text(item.headerValue),
+                );
+              },
+              body: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(item.expandedValue),
+              ),
+              isExpanded: item.isExpanded,
+            );
+          }).toList(),
+        ),
       ),
     );
   }

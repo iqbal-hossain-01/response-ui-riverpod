@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ui_design_riverpod_state/pages/home_page.dart';
 import 'package:ui_design_riverpod_state/pages/pages.dart';
 
 void main() {
@@ -38,6 +37,16 @@ class MyApp extends StatelessWidget {
             name: ExpansionWidgetsPage.routeName,
             path: 'expansion',
             builder: (context, state) => const ExpansionWidgetsPage(),
+          ),
+          GoRoute(
+            name: ResponsiveUi1.routeName,
+            path: 'responsive1',
+            builder: (context, state) => const ResponsiveUi1(),
+          ),
+          GoRoute(
+            name: ResponsiveUi2.routeName,
+            path: 'responsive2',
+            builder: (context, state) => const ResponsiveUi2(),
           ),
         ]
       ),
